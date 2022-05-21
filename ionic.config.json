@@ -1,0 +1,7 @@
+{
+  "name": "cotação dolar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
