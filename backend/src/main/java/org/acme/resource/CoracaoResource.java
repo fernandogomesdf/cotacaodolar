@@ -1,2 +1,16 @@
-package org.acme.resource;public class CoracaoResource {
+package org.acme.resource;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/cotacao")
+public class CoracaoResource {
+
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public String consultarCotacao() {
+    return "Cotação";
+  }
 }
