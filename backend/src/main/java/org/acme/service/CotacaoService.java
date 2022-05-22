@@ -14,10 +14,15 @@ public class CotacaoService {
   @Inject
   CotacaoRepository cotacaoRepository;
 
+  /**
+   * Consulta a cotção de uma data
+   * @param cotacaoDTO
+   * @return
+   */
   public Cotacao consultarCotacao(CotacaoDTO cotacaoDTO) {
 
     Cotacao cotacao = new Cotacao();
-    cotacao.setData(new Date());
+    cotacao.setDataRequisicao(new Date());
     cotacaoRepository.add(cotacao);
 
     return cotacaoRepository.list().get(0);

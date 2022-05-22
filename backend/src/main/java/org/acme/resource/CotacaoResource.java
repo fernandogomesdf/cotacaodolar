@@ -16,6 +16,11 @@ public class CotacaoResource {
   @Inject
   CotacaoService counterService;
 
+  /**
+   * Consulta a contação de uma data
+   * @param cotacaoDTO
+   * @return
+   */
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   public Cotacao consultarCotacao(CotacaoDTO cotacaoDTO) {
