@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService, VerboHttp } from '../app.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
   }
 
   pesquisarCotacao(value) {
-    console.log('Pesquisar cotação', new Date(value));
+    this.appService.request('./cotacao', { data: value }, VerboHttp.POST).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
   }
 
   //http://localhost:8080/cotacao

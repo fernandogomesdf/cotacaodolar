@@ -12,10 +12,6 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getLocalServerHostPort() {
-    return '//' + location.hostname + ':' + location.port;
-  }
-
   getServerHostPort() {
     let serverHostPort = location.protocol + '//localhost:8080';
     if ('8100' !== location.port && '4200' !== location.port) { // local
@@ -51,9 +47,7 @@ export class AppService {
 
   request(url: string, data: any, verbo: VerboHttp): Observable<any> {
     this.showProgress = true;
-    const response$ = this.chamarUrl(url.startsWith('./')
-      ? (this.getLocalServerHostPort() + url.replace('./', '/'))
-      : this.getServerHostPort() + url, data, verbo).pipe(
+    const response$ = this.chamarUrl(this.getServerHostPort() + url.replace('./', '/'), data, verbo).pipe(
         map(response => response),
         share()
       );
