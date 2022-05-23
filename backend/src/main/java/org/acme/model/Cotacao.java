@@ -17,6 +17,7 @@ import java.util.Date;
 @MongoEntity(collection = "cotacao", database = "cotacao")
 public class Cotacao extends PanacheMongoEntity {
 
+
   String dataSolicitada;
 
   private Date dataRequisicao;
