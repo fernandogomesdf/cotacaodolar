@@ -29,7 +29,7 @@ public class CotacaoResource {
     try {
       cotacao = counterService.consultarCotacao(cotacaoDTO);
     } catch (Exception e) {
-
+      
     }
     return cotacao;
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AppService {
 
   public showProgress = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public alertController: AlertController) { }
 
   getServerHostPort() {
     let serverHostPort = location.protocol + '//localhost:8080';
@@ -48,12 +49,12 @@ export class AppService {
   request(url: string, data: any, verbo: VerboHttp): Observable<any> {
     this.showProgress = true;
     const response$ = this.chamarUrl(this.getServerHostPort() + url.replace('./', '/'), data, verbo).pipe(
-        map(response => response),
-        share()
-      );
+      map(response => response),
+      share()
+    );
     response$.subscribe({
       error: (err) => {
-        //this.tratarErro(err);
+        this.tratarErro(err);
         this.showProgress = false;
       },
       complete: () => {
@@ -61,6 +62,36 @@ export class AppService {
       }
     });
     return response$;
+  }
+
+  tratarErro(err) {
+    try {
+      if (err.error.type === 'error') {
+        this.alert('Não foi possí­vel conectar no servidor.');
+      } else {
+        const resposta = err.error;
+        if (resposta.status === 500 || err.status === 500) {
+          this.alert(resposta.message);
+        } else if (resposta.status === 400 || err.status === 400) {
+          this.alert(resposta.violations[0].message);
+        }
+        if (resposta.exception) {
+          console.log(resposta.exception);
+        }
+      }
+    } catch (erro) {
+      console.log(erro);
+    }
+  }
+
+  async alert(msg) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
 

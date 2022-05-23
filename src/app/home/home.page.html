@@ -4,8 +4,13 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Cotação</ion-title>
+    <ion-buttons slot="end" *ngIf="appService.showProgress">
+      <ion-spinner></ion-spinner>
+    </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <div id="container">
@@ -20,9 +25,10 @@
           </div>
         </ion-col>
         <ion-col>
-          <div *ngIf="resultado">
-            <h1>Cotação {{datetime.value | date: 'dd/MM/yyyy' }}</h1>
-            <br>
+
+          <div *ngIf="resultado && resultado.id">
+            <span style="font-size: 20px;">Cotação USD {{datetime.value | date: 'dd/MM/yyyy' }}</span>
+            <br><br>
             Compra : {{resultado.cotacaoCompra | currency : 'BRL'}}<br>
             Venda : {{resultado.cotacaoVenda | currency : 'BRL'}}<br>
             Data/Hora : {{resultado.dataHoraCotacao | slice : 0:19| date: 'dd/MM/yyyy HH:mm:ss' }}

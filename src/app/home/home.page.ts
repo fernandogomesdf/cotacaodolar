@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   }
 
   pesquisarCotacao(value) {
+    this.resultado = {};
     this.appService.request('./cotacao', { data: value }, VerboHttp.POST).subscribe(
       response => {
         this.resultado = response;
