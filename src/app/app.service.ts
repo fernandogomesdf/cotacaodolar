@@ -73,7 +73,12 @@ export class AppService {
         if (resposta.status === 500 || err.status === 500) {
           this.alert(resposta.message);
         } else if (resposta.status === 400 || err.status === 400) {
-          this.alert(resposta.violations[0].message);
+          if (resposta.violations) {
+            this.alert(resposta.violations[0].message);
+          }
+          if (resposta.message) {
+            this.alert(resposta.message);
+          }
         }
         if (resposta.exception) {
           console.log(resposta.exception);
