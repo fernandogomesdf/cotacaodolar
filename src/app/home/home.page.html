@@ -9,9 +9,26 @@
 
 <ion-content [fullscreen]="true">
   <div id="container">
-    Informe a data da cotação desejada : <br /><br />
-    <ion-datetime #datetime min="2000-01-01" locale="pt-BR" presentation="date"
-      (ionChange)="pesquisarCotacao(datetime.value)">
-    </ion-datetime>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            Informe a data da cotação desejada : <br /><br />
+            <ion-datetime #datetime min="2000-01-01" locale="pt-BR" presentation="date"
+              (ionChange)="pesquisarCotacao(datetime.value)">
+            </ion-datetime>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div *ngIf="resultado">
+            <h1>Cotação {{datetime.value | date: 'dd/MM/yyyy' }}</h1>
+            <br>
+            Compra : {{resultado.cotacaoCompra | currency : 'BRL'}}<br>
+            Venda : {{resultado.cotacaoVenda | currency : 'BRL'}}<br>
+            Data/Hora : {{resultado.dataHoraCotacao | slice : 0:19| date: 'dd/MM/yyyy HH:mm:ss' }}
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

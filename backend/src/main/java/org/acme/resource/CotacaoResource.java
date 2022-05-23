@@ -24,8 +24,13 @@ public class CotacaoResource {
    */
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public Cotacao consultarCotacao(@Valid  CotacaoDTO cotacaoDTO) throws Exception {
-    Cotacao cotacao = counterService.consultarCotacao(cotacaoDTO);
+  public Cotacao consultarCotacao(@Valid  CotacaoDTO cotacaoDTO) {
+    Cotacao cotacao = null;
+    try {
+      cotacao = counterService.consultarCotacao(cotacaoDTO);
+    } catch (Exception e) {
+
+    }
     return cotacao;
   }
 }

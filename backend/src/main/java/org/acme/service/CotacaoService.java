@@ -82,7 +82,7 @@ public class CotacaoService {
       JSONObject jsonValor = valores.getJSONObject(0);
       cotacao.setCotacaoCompra(BigDecimal.valueOf(jsonValor.getDouble("cotacaoCompra")));
       cotacao.setCotacaoVenda(BigDecimal.valueOf(jsonValor.getDouble("cotacaoVenda")));
-      cotacao.setDataCotacao(simpleDateFormatBC.parse(jsonValor.getString("dataHoraCotacao")));
+      cotacao.setDataHoraCotacao(simpleDateFormatBC.parse(jsonValor.getString("dataHoraCotacao")));
       cotacao.setDataRequisicao(new Date());
       cotacaoRepository.persist(cotacao);
       PanacheQuery<Cotacao> contacaoMongo = findByData(cotacao);

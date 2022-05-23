@@ -8,6 +8,8 @@ import { AppService, VerboHttp } from '../app.service';
 })
 export class HomePage implements OnInit {
 
+  resultado = {};
+
   constructor(private appService: AppService) { }
 
   ngOnInit() {
@@ -16,11 +18,11 @@ export class HomePage implements OnInit {
   pesquisarCotacao(value) {
     this.appService.request('./cotacao', { data: value }, VerboHttp.POST).subscribe(
       response => {
-        console.log(response);
+        this.resultado = response;
       }
     );
   }
 
-  //http://localhost:8080/cotacao
+
 
 }

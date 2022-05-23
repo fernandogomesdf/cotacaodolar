@@ -22,7 +22,7 @@ public class Cotacao extends PanacheMongoEntity {
 
   private Date dataRequisicao;
 
-  private Date dataCotacao;
+  private Date dataHoraCotacao;
   private BigDecimal cotacaoCompra;
   private BigDecimal cotacaoVenda;
 
@@ -42,12 +42,12 @@ public class Cotacao extends PanacheMongoEntity {
     this.dataRequisicao = dataRequisicao;
   }
 
-  public Date getDataCotacao() {
-    return dataCotacao;
+  public Date getDataHoraCotacao() {
+    return dataHoraCotacao;
   }
 
-  public void setDataCotacao(Date dataCotacao) {
-    this.dataCotacao = dataCotacao;
+  public void setDataHoraCotacao(Date dataHoraCotacao) {
+    this.dataHoraCotacao = dataHoraCotacao;
   }
 
   public BigDecimal getCotacaoCompra() {
