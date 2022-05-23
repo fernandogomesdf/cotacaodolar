@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Serviço para consulta das cotações do dólar
@@ -29,7 +30,7 @@ public class CotacaoService {
 
   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy");
   SimpleDateFormat simpleDateFormatBC = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-  
+
   /**
    * Consulta a cotção de uma data
    * @param cotacaoDTO
@@ -42,25 +43,26 @@ public class CotacaoService {
     Cotacao cotacao = new Cotacao();
     cotacao.setDataSolicitada(simpleDateFormat.format(data));
 
-    PanacheQuery<Cotacao> contacaoMongo = cotacaoRepository.find("dataSolicitada", cotacao.getDataSolicitada());
-    contacaoMongo.page(0,1);
-
-    if (contacaoMongo.hasNextPage()) {
-      cotacao = contacaoMongo.firstResult();
-
+    PanacheQuery<Cotacao> contacaoMongo = findByData(cotacao);
+    List<Cotacao> cotacaos = contacaoMongo.list();
+    if (cotacaos.size() != 0) {
+      cotacao = cotacaos.get(0);
       System.out.println("cotacao base " + cotacao);
     } else {
       cotacao = consutarEndpointEPersistir(cotacao);
-
       System.out.println("cotacao endpoint " + cotacao);
     }
 
     return cotacao;
   }
 
+  private PanacheQuery<Cotacao> findByData(Cotacao cotacao) {
+    PanacheQuery<Cotacao> contacaoMongo = cotacaoRepository.find("dataSolicitada", cotacao.getDataSolicitada());
+    return contacaoMongo;
+  }
+
   /**
    * consulta o endpoint do BC e persiste na base
-   * @param cotacao
    * @return
    * @throws Exception
    */
@@ -83,6 +85,11 @@ public class CotacaoService {
       cotacao.setDataCotacao(simpleDateFormatBC.parse(jsonValor.getString("dataHoraCotacao")));
       cotacao.setDataRequisicao(new Date());
       cotacaoRepository.persist(cotacao);
+      PanacheQuery<Cotacao> contacaoMongo = findByData(cotacao);
+      List<Cotacao> cotacaos = contacaoMongo.list();
+      if (cotacaos.size() != 0) {
+        cotacao = cotacaos.get(0);
+      }
     }
 
     return cotacao;
