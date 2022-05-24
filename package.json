@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && cd backend && mvnw package -Pnative -Dquarkus.native.container-build=true && docker build -f src/main/docker/Dockerfile.native -t quarkus/cotacao .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
