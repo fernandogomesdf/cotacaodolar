@@ -20,12 +20,12 @@ rule_files:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 120s
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
+    scrape_interval: 120sx
     static_configs:
-         - targets: ['localhost:9090','cadvisor:8080','node-exporter:9100', 'nginx-exporter:9113']
+         - targets: ['localhost:9090']
+
+  - job_name: 'cotacao'
+    scrape_interval: 120sx
+    metrics_path: /q/metrics
+    static_configs:
+         - targets: ['cotacao:8080']
