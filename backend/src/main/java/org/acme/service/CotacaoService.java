@@ -4,6 +4,7 @@ import io.quarkus.mongodb.panache.PanacheQuery;
 import org.acme.dto.CotacaoDTO;
 import org.acme.model.Cotacao;
 import org.acme.repository.CotacaoRepository;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * Serviço para consulta das cotações do dólar
  */
+@Traced
 @ApplicationScoped
 public class CotacaoService {
 

@@ -6,10 +6,17 @@ services:
     image: mongo
     restart: always
 
-  mongo-express:
-    image: mongo-express
-    restart: always
+  jaeger:
+    image: jaegertracing/all-in-one:1.7
+    container_name: jaeger
+    restart: on-failure
     ports:
-      - 8081:8081
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+      - 9411:9411
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
