@@ -30,3 +30,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+data/grafana/grafana.db
+data/grafana/alerting/1/__default__.tmpl
