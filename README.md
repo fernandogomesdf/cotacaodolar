@@ -3,6 +3,7 @@
 Pequeno projeto para consulta da cotação do dólar
 
 Swagger : http://localhost:8080/q/swagger-ui
+
 Métricas : http://localhost:8080/q/metrics
 
 O diretório principal corresponde ao frontend angular. O backend quarkus fica no diretório 'backend' 
