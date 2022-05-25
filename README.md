@@ -17,3 +17,29 @@ O comando npm run build também irá criar e registrar a imagem docker. Após o 
 
 - docker-compose up -d
 
+# Especificação
+
+Eu, como um investidor, gostaria de cosultar as cotações do dólar, porque eu preciso saber quais as melhores opções de investimento.
+
+Critério de Aceite:
+
+    - Permitir que o investidor consulte a cotação informando uma data
+    - Permitir visualizar a cotação de compra, de venda e a hora da cotação
+    - Permitir ser informada a data através de um calendário pra facilitar a busca
+
+Regras de negócio:
+
+    - Não permitir informar uma data nula
+    - Não permitir informar uma data futura
+    - Caso não exista cotação para o dia, deve informar que não existe cotação para o dia
+    - Deve gravar em respositório local todas as cotações consultadas
+    - Deve buscar a cotação externamente apenas se ela não existe localmente
+
+Cenários de teste:
+
+    - Informar uma data nula
+    - Informar uma data futura
+    - Informar uma data muito antiga
+    - Consultar pelo frontend sem o backend estar funcionando
+    - Verificar se as datas são consultadas primeiramente no repositório local e depois no serviço do BC, caso não encontre
+
