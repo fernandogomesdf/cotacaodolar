@@ -44,3 +44,9 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_SERVER_DOMAIN=xpto.com
       - GF_SMTP_ENABLED=false
+
+  cotacao:
+    image: quarkus/cotacao
+    restart: always
+    ports:
+      - 8080:8080
