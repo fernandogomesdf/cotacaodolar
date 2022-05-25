@@ -1,4 +1,4 @@
-# cotacaodolar
+# Cotação Dólar
 
 Pequeno projeto para consulta da cotação do dólar
 
